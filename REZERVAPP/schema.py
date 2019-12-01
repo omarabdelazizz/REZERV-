@@ -15,7 +15,7 @@ class profileNode(DjangoObjectType):
 class bestNode(DjangoObjectType):
     class Meta:
         model = best
-        filter_fields = ['profile_id','resturant_id']
+        filter_fields = ['profileid','resturantid']
         interfaces = (relay.Node,)
 
 class ResturantNode(DjangoObjectType):
@@ -27,15 +27,14 @@ class ResturantNode(DjangoObjectType):
 class RequestNode(DjangoObjectType):
     class Meta:
         model = Request
-        filter_fields = ['rest_admin_id','no_of_people','RequestTypes']
+        filter_fields = ['restadminid','noofpeople','RequestTypes']
         interfaces = (relay.Node,)
 
-]
 
 class ResturantAdminNode(DjangoObjectType):
     class Meta:
         model = ResturantAdmin
-        filter_fields = ['traffic','pending_requests']
+        filter_fields = ['traffic']
         interfaces = (relay.Node,)
 
 
@@ -61,7 +60,7 @@ class CreateprofilesMutaion(DjangoModelFormMutation):
     profile = graphene.Field(profileType)
 
     class Meta:
-        form_class =CreateprofileForm
+        form_class =CreateProfileForm
         input_field_name = 'name','picture','Email','requests'
         return_field_name = 'name','picture','Email','requests'
 
@@ -69,14 +68,14 @@ class CreateprofilesMutaion(DjangoModelFormMutation):
 class bestType (DjangoObjectType):
     class Meta:
         model = best
-class CreatepostsMutaion(DjangoModelFormMutation):
+class CreatebestMutaion(DjangoModelFormMutation):
     #creat object from comment form
     best = graphene.Field(bestType)
 
     class Meta:
         form_class =CreatebestForm
-        input_field_name = 'profile_id','resturant_id'
-        return_field_name = 'profile_id','resturant_id'
+        input_field_name = 'profileid','resturantid'
+        return_field_name = 'profileid','resturantid'
 
 #Resturant
 class ResturantType (DjangoObjectType):
@@ -87,7 +86,7 @@ class CreateResturantsMutaion(DjangoModelFormMutation):
     Resturant = graphene.Field(ResturantType)
 
     class Meta:
-        form_class =CreateResturantsForm
+        form_class =CreateResturantForm
         input_field_name = 'name','traffic','rate','favourite','Requests','location'
         return_field_name = 'name','traffic','rate','favourite','Requests','location'
 
@@ -95,14 +94,14 @@ class CreateResturantsMutaion(DjangoModelFormMutation):
 class RequestsType (DjangoObjectType):
     class Meta:
         model = Request
-class CreatevideoMutaion(DjangoModelFormMutation):
+class CreateRequestMutaion(DjangoModelFormMutation):
     #creat object from comment form
     Request = graphene.Field(RequestsType)
 
     class Meta:
-        form_class =CreateRequestsForm
-        input_field_name = 'rest_admin_id','RequestTypes','no_of_people'
-        return_field_name = 'rest_admin_id','RequestTypes','no_of_people'
+        form_class =CreateRequestForm
+        input_field_name = 'restadminid','RequestTypes','noofpeople'
+        return_field_name = 'restadminid','RequestTypes','noofpeople'
 
 
 #ResturantAdmin
@@ -115,13 +114,13 @@ class CreateResturantAdminMutaion(DjangoModelFormMutation):
 
     class Meta:
         form_class =CreateResturantAdminForm
-        input_field_name = 'traffic','pending_requests'
-        return_field_name = 'traffic','pending_requests'
+        input_field_name = 'traffic'
+        return_field_name = 'traffic'
 
 
 class Mutation(ObjectType):
-    create_profile = CreateprofileMutaion.Field()
+    create_profile = CreateprofilesMutaion.Field()
     create_best = CreatebestMutaion.Field()
-    create_Resturant = CreateResturantMutaion.Field()
+    create_Resturant = CreateResturantsMutaion.Field()
     create_Request = CreateRequestMutaion.Field()
     create_ResturantAdmin = CreateResturantAdminMutaion.Field()

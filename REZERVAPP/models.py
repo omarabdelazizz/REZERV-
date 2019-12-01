@@ -12,22 +12,22 @@ class profile(models.Model):
 
 class best(models.Model):
     #best is the favourits
-    profile_id = models.ManyToManyField('profile')
-    resturant_id = models.ForeignKey('Resturant', on_delete=models.CASCADE,)
+    profileid = models.ManyToManyField('profile')
+    resturantid = models.ForeignKey('Resturant', on_delete=models.CASCADE,)
 
 
 class Resturant(models.Model):
     name = models.CharField(max_length=264, unique=True)
     traffic = models.IntegerField()
-    rate = models.FloatField(default="", editable=False)
+    rate = models.FloatField(default="", editable=True)
     favourite = models.ForeignKey('best', on_delete=models.CASCADE,)
     Requests = models.ForeignKey('Request',on_delete=models.CASCADE,)
     location = models.CharField(max_length=264, unique=True)
 
 class Request(models.Model):
-    rest_admin_id = models.AutoField(primary_key=True)
+    restadminid = models.AutoField(primary_key=True)
     #time = models.TimeField(default="", editable=False)
-    no_of_people = models.IntegerField(default="", editable=False)
+    noofpeople = models.IntegerField(default="", editable=True)
     #date = models.DateField(default="", editable=False)
     ACCEPTED = 'AC'
     REJECTED = 'REJ'
@@ -45,4 +45,4 @@ class Request(models.Model):
         return self.RequestTypes in (self.ACCEPTED , self.REJECTED, self.CANCELED, self.PENDING)
 
 class ResturantAdmin (models.Model):
-    traffic=models.IntegerField(default="", editable=False)
+    traffic=models.IntegerField(default="", editable=True)
