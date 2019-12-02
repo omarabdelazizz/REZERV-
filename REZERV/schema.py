@@ -8,7 +8,7 @@ class Query(REZERVAPP.schema.Query, graphene.ObjectType):
     pass
 
 class Mutation(REZERVAPP.schema.Mutation, graphene.ObjectType):
-    # This class will inherit from multiple Queries
+    # This class will inherit from multiple mutation
     # as we begin to add more apps to our project
     pass
 

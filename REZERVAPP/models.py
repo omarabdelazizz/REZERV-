@@ -8,12 +8,14 @@ class profile(models.Model):
     requests = models.ForeignKey('Request',on_delete=models.CASCADE,)
 
     def __str__(self):
-        return self.name + " " + self.Email
+        return self.name+" "+self.picture+" "+self.Email
+
+
 
 class best(models.Model):
     #best is the favourits
-    profileid = models.ManyToManyField('profile')
-    resturantid = models.ForeignKey('Resturant', on_delete=models.CASCADE,)
+    profile_id = models.ManyToManyField('profile')
+    resturant_id = models.ForeignKey('Resturant', on_delete=models.CASCADE,)
 
 
 class Resturant(models.Model):
@@ -25,9 +27,9 @@ class Resturant(models.Model):
     location = models.CharField(max_length=264, unique=True)
 
 class Request(models.Model):
-    restadminid = models.AutoField(primary_key=True)
+    rest_admin_id = models.AutoField(primary_key=True)
     #time = models.TimeField(default="", editable=False)
-    noofpeople = models.IntegerField(default="", editable=True)
+    no_of_people = models.IntegerField(default="", editable=True)
     #date = models.DateField(default="", editable=False)
     ACCEPTED = 'AC'
     REJECTED = 'REJ'
@@ -45,4 +47,6 @@ class Request(models.Model):
         return self.RequestTypes in (self.ACCEPTED , self.REJECTED, self.CANCELED, self.PENDING)
 
 class ResturantAdmin (models.Model):
+    resturant_id= models.ForeignKey('Resturant', on_delete=models.CASCADE,)
+    requests=models.ForeignKey('Request', on_delete=models.CASCADE,)
     traffic=models.IntegerField(default="", editable=True)

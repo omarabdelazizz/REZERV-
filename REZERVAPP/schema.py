@@ -15,7 +15,7 @@ class profileNode(DjangoObjectType):
 class bestNode(DjangoObjectType):
     class Meta:
         model = best
-        filter_fields = ['profileid','resturantid']
+        filter_fields = ['profile_id','resturant_id']
         interfaces = (relay.Node,)
 
 class ResturantNode(DjangoObjectType):
@@ -27,14 +27,14 @@ class ResturantNode(DjangoObjectType):
 class RequestNode(DjangoObjectType):
     class Meta:
         model = Request
-        filter_fields = ['restadminid','noofpeople','RequestTypes']
+        filter_fields = ['rest_admin_id','no_of_people','RequestTypes']
         interfaces = (relay.Node,)
 
 
 class ResturantAdminNode(DjangoObjectType):
     class Meta:
         model = ResturantAdmin
-        filter_fields = ['traffic']
+        filter_fields = ['traffic','resturant_id','requests']
         interfaces = (relay.Node,)
 
 
@@ -51,19 +51,6 @@ class Query(ObjectType):
     get_requests = relay.Node.Field(RequestNode)
     get_resturantAdmins = relay.Node.Field(ResturantAdminNode)
 
-#profile
-class profileType (DjangoObjectType):
-    class Meta:
-        model = profile
-class CreateprofilesMutaion(DjangoModelFormMutation):
-    #creat object from comment form
-    profile = graphene.Field(profileType)
-
-    class Meta:
-        form_class =CreateProfileForm
-        input_field_name = 'name','picture','Email','requests'
-        return_field_name = 'name','picture','Email','requests'
-
 #best
 class bestType (DjangoObjectType):
     class Meta:
@@ -74,43 +61,39 @@ class CreatebestMutaion(DjangoModelFormMutation):
 
     class Meta:
         form_class =CreatebestForm
-        input_field_name = 'profileid','resturantid'
-        return_field_name = 'profileid','resturantid'
-
+        input_field_name = 'profile_id'
+        return_field_name = 'profile_id'
 #Resturant
 class ResturantType (DjangoObjectType):
     class Meta:
         model = Resturant
-class CreateResturantsMutaion(DjangoModelFormMutation):
+class CreateResturantMutaion(DjangoModelFormMutation):
     #creat object from comment form
     Resturant = graphene.Field(ResturantType)
 
     class Meta:
         form_class =CreateResturantForm
-        input_field_name = 'name','traffic','rate','favourite','Requests','location'
-        return_field_name = 'name','traffic','rate','favourite','Requests','location'
-
+        input_field_name = 'name'
+        return_field_name = 'name'
 #Request
-class RequestsType (DjangoObjectType):
+class RequestTypes(DjangoObjectType):
     class Meta:
         model = Request
 class CreateRequestMutaion(DjangoModelFormMutation):
     #creat object from comment form
-    Request = graphene.Field(RequestsType)
+    Request = graphene.Field(RequestTypes)
 
     class Meta:
         form_class =CreateRequestForm
-        input_field_name = 'restadminid','RequestTypes','noofpeople'
-        return_field_name = 'restadminid','RequestTypes','noofpeople'
+        input_field_name = 'noofpeople'
+        return_field_name = 'noofpeople'
 
-
-#ResturantAdmin
-class ResturantAdminType (DjangoObjectType):
+#Resturant_Admin
+class ResturantAdminTypes(DjangoObjectType):
     class Meta:
-        model = ResturantAdmin
-class CreateResturantAdminMutaion(DjangoModelFormMutation):
-    #creat object from comment form
-    ResturantAdmins = graphene.Field(ResturantAdminType)
+        model= ResturantAdmin
+class CreateResturantAdminMutation(DjangoModelFormMutation):
+    ResturantAdmin = graphene.Field(ResturantAdminTypes)
 
     class Meta:
         form_class =CreateResturantAdminForm
@@ -118,9 +101,9 @@ class CreateResturantAdminMutaion(DjangoModelFormMutation):
         return_field_name = 'traffic'
 
 
+
 class Mutation(ObjectType):
-    create_profile = CreateprofilesMutaion.Field()
     create_best = CreatebestMutaion.Field()
-    create_Resturant = CreateResturantsMutaion.Field()
-    create_Request = CreateRequestMutaion.Field()
-    create_ResturantAdmin = CreateResturantAdminMutaion.Field()
+    create_resturant = CreateResturantMutaion.Field()
+    create_request = CreateRequestMutaion.Field()
+    create_resturantadmin = CreateResturantAdminMutation.Field()
