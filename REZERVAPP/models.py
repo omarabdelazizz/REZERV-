@@ -20,8 +20,8 @@ class best(models.Model):
 
 class Resturant(models.Model):
     name = models.CharField(max_length=264, unique=True)
-    traffic = models.IntegerField()
-    rate = models.FloatField(default="", editable=True)
+    traffic = models.IntegerField(null=True, blank=True, default=0)
+    rate = models.FloatField(null=True, blank=True, default=0)
     favourite = models.ForeignKey('best', on_delete=models.CASCADE,)
     Requests = models.ForeignKey('Request',on_delete=models.CASCADE,)
     location = models.CharField(max_length=264, unique=True)
@@ -29,7 +29,7 @@ class Resturant(models.Model):
 class Request(models.Model):
     rest_admin_id = models.AutoField(primary_key=True)
     #time = models.TimeField(default="", editable=False)
-    no_of_people = models.IntegerField(default="", editable=True)
+    no_of_people = models.IntegerField(null=True, blank=True, default=0)
     #date = models.DateField(default="", editable=False)
     ACCEPTED = 'AC'
     REJECTED = 'REJ'
@@ -49,4 +49,4 @@ class Request(models.Model):
 class ResturantAdmin (models.Model):
     resturant_id= models.ForeignKey('Resturant', on_delete=models.CASCADE,)
     requests=models.ForeignKey('Request', on_delete=models.CASCADE,)
-    traffic=models.IntegerField(default="", editable=True)
+    traffic=models.IntegerField(null=True, blank=True, default=0)
