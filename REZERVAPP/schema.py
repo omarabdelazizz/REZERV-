@@ -21,7 +21,7 @@ class bestNode(DjangoObjectType):
 class ResturantNode(DjangoObjectType):
     class Meta:
         model = Resturant
-        filter_fields = ['name','traffic','rate','location']
+        filter_fields = ['name','traffic','rate','location','requests']
         interfaces = (relay.Node,)
 
 class RequestNode(DjangoObjectType):
