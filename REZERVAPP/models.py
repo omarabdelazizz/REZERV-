@@ -13,7 +13,7 @@ class profile(models.Model):
 class best(models.Model):
     #best is the favourits
     profile_id = models.ManyToManyField('profile')
-    resturant_id = models.ForeignKey('Resturant', on_delete=models.CASCADE,)
+    resturant_id = models.ForeignKey('Resturant', on_delete=models.CASCADE,null=True,blank=True)
 
 
 
@@ -46,6 +46,6 @@ class Request(models.Model):
 
 class ResturantAdmin (models.Model):
     name = models.CharField(max_length=264, unique=True)
-    resturantid= models.ForeignKey('Resturant', on_delete=models.CASCADE,)
+    resturantid= models.ForeignKey('Resturant', on_delete=models.CASCADE,null=True,blank=True)
     requests=models.ManyToManyField('Request')
     traffic=models.IntegerField(null=True, blank=True, default=0)

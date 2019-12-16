@@ -19,4 +19,4 @@ class CreateRequestForm(forms.ModelForm):
 class CreateResturantAdminForm(forms.ModelForm):
     class Meta:
         model = ResturantAdmin
-        fields = ('resturantid',)
+        fields = ('name',)
