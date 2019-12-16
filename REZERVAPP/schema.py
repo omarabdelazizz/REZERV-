@@ -34,7 +34,7 @@ class RequestNode(DjangoObjectType):
 class ResturantAdminNode(DjangoObjectType):
     class Meta:
         model = ResturantAdmin
-        filter_fields = ['traffic','resturantid','name']
+        filter_fields = ['traffic','resturantid','name','requests']
         interfaces = (relay.Node,)
 
 
