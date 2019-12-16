@@ -9,7 +9,7 @@ class CreatebestForm(forms.ModelForm):
 class CreateResturantForm(forms.ModelForm):
     class Meta:
         model = Resturant
-        fields = ('name','traffic','rate','location','favourite','Requests',)
+        fields = ('name','location',)
 
 class CreateRequestForm(forms.ModelForm):
     class Meta:
@@ -19,4 +19,4 @@ class CreateRequestForm(forms.ModelForm):
 class CreateResturantAdminForm(forms.ModelForm):
     class Meta:
         model = ResturantAdmin
-        fields = ('traffic','resturant_id','requests',)
+        fields = ('resturantid',)

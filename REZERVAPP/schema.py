@@ -21,7 +21,7 @@ class bestNode(DjangoObjectType):
 class ResturantNode(DjangoObjectType):
     class Meta:
         model = Resturant
-        filter_fields = ['name','traffic','rate','favourite','Requests','location']
+        filter_fields = ['name','traffic','rate','location']
         interfaces = (relay.Node,)
 
 class RequestNode(DjangoObjectType):
@@ -34,7 +34,7 @@ class RequestNode(DjangoObjectType):
 class ResturantAdminNode(DjangoObjectType):
     class Meta:
         model = ResturantAdmin
-        filter_fields = ['traffic','resturant_id','requests']
+        filter_fields = ['traffic','resturantid','name']
         interfaces = (relay.Node,)
 
 
@@ -61,8 +61,8 @@ class CreatebestMutaion(DjangoModelFormMutation):
 
     class Meta:
         form_class =CreatebestForm
-        input_field_name = 'profile_id'
-        return_field_name = 'profile_id'
+        input_field_name = 'favourits'
+        return_field_name = 'resturant_id'
 #Resturant
 class ResturantType (DjangoObjectType):
     class Meta:
@@ -73,8 +73,8 @@ class CreateResturantMutaion(DjangoModelFormMutation):
 
     class Meta:
         form_class =CreateResturantForm
-        input_field_name = 'name'
-        return_field_name = 'name'
+        input_field_name = 'data'
+        return_field_name = 'resturant_name'
 #Request
 class RequestTypes(DjangoObjectType):
     class Meta:
@@ -85,8 +85,8 @@ class CreateRequestMutaion(DjangoModelFormMutation):
 
     class Meta:
         form_class =CreateRequestForm
-        input_field_name = 'noofpeople'
-        return_field_name = 'noofpeople'
+        input_field_name = 'req'
+        return_field_name = 'succed'
 
 #Resturant_Admin
 class ResturantAdminTypes(DjangoObjectType):
@@ -97,8 +97,8 @@ class CreateResturantAdminMutation(DjangoModelFormMutation):
 
     class Meta:
         form_class =CreateResturantAdminForm
-        input_field_name = 'traffic'
-        return_field_name = 'traffic'
+        input_field_name = 'new'
+        return_field_name = 'done'
 
 
 

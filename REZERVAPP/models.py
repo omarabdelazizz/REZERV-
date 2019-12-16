@@ -10,20 +10,18 @@ class profile(models.Model):
     def __str__(self):
         return self.name+" "+self.picture+" "+self.Email
 
-
-
 class best(models.Model):
     #best is the favourits
     profile_id = models.ManyToManyField('profile')
     resturant_id = models.ForeignKey('Resturant', on_delete=models.CASCADE,)
 
 
+
 class Resturant(models.Model):
     name = models.CharField(max_length=264, unique=True)
     traffic = models.IntegerField(null=True, blank=True, default=0)
     rate = models.FloatField(null=True, blank=True, default=0)
-    favourite = models.ForeignKey('best', on_delete=models.CASCADE,)
-    Requests = models.ForeignKey('Request',on_delete=models.CASCADE,)
+    requests=models.ManyToManyField('Request')
     location = models.CharField(max_length=264, unique=True)
 
 class Request(models.Model):
@@ -47,6 +45,7 @@ class Request(models.Model):
         return self.RequestTypes in (self.ACCEPTED , self.REJECTED, self.CANCELED, self.PENDING)
 
 class ResturantAdmin (models.Model):
-    resturant_id= models.ForeignKey('Resturant', on_delete=models.CASCADE,)
-    requests=models.ForeignKey('Request', on_delete=models.CASCADE,)
+    name = models.CharField(max_length=264, unique=True)
+    resturantid= models.ForeignKey('Resturant', on_delete=models.CASCADE,)
+    requests=models.ManyToManyField('Request')
     traffic=models.IntegerField(null=True, blank=True, default=0)
