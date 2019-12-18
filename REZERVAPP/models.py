@@ -21,7 +21,7 @@ class Resturant(models.Model):
     name = models.CharField(max_length=264, unique=True)
     traffic = models.IntegerField(null=True, blank=True, default=0)
     rate = models.FloatField(null=True, blank=True, default=0)
-    requests=models.ManyToManyField('Request')
+    requests=models.ManyToManyField('Request',null=True,blank=True)
     location = models.CharField(max_length=264, unique=True)
 
 class Request(models.Model):

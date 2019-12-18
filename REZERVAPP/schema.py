@@ -74,7 +74,7 @@ class CreateResturantMutaion(DjangoModelFormMutation):
     class Meta:
         form_class =CreateResturantForm
         input_field_name = 'data'
-        return_field_name = 'resturant_name'
+        return_field_name = 'resturantName'
 #Request
 class RequestTypes(DjangoObjectType):
     class Meta:
