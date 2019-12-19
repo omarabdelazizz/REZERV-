@@ -3,9 +3,8 @@ from django.db import models
 
 class profile(models.Model):
     name = models.CharField(max_length=264, unique=True)
-    picture = models.CharField(max_length=264, unique=True)
     Email = models.CharField(max_length=264, unique=True)
-    requests = models.ForeignKey('Request',on_delete=models.CASCADE,)
+    requests = models.ForeignKey('Request',on_delete=models.CASCADE,null=True,blank=True)
 
     def __str__(self):
         return self.name+" "+self.picture+" "+self.Email

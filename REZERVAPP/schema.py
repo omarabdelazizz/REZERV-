@@ -8,7 +8,7 @@ from .Forms import *
 class profileNode(DjangoObjectType):
     class Meta:
         model = profile
-        filter_fields = ['name','picture','Email','requests']
+        filter_fields = ['name','Email','requests']
         interfaces = (relay.Node,)
         # fields = ('id', 'first_name', 'email')
 
@@ -50,7 +50,18 @@ class Query(ObjectType):
     get_resturants = relay.Node.Field(ResturantNode)
     get_requests = relay.Node.Field(RequestNode)
     get_resturantAdmins = relay.Node.Field(ResturantAdminNode)
+#profile
+class profileType (DjangoObjectType):
+    class Meta:
+        model = profile
+class createprofileMutation(DjangoModelFormMutation):
+    #creat object from comment form
+    profile = graphene.Field(profileType)
 
+    class Meta:
+        form_class =CreateprofileForm
+        input_field_name = 'myprofile'
+        return_field_name = 'Name'
 #best
 class bestType (DjangoObjectType):
     class Meta:
@@ -103,6 +114,7 @@ class CreateResturantAdminMutation(DjangoModelFormMutation):
 
 
 class Mutation(ObjectType):
+    create_profile = createprofileMutation.Field()
     create_best = CreatebestMutaion.Field()
     create_resturant = CreateResturantMutaion.Field()
     create_request = CreateRequestMutaion.Field()
