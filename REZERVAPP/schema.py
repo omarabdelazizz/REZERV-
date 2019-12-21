@@ -15,7 +15,7 @@ class profileNode(DjangoObjectType):
 class bestNode(DjangoObjectType):
     class Meta:
         model = best
-        filter_fields = ['profile_id','resturant_id']
+        filter_fields = ['profile_name','resturant_name']
         interfaces = (relay.Node,)
 
 class ResturantNode(DjangoObjectType):
@@ -73,7 +73,7 @@ class CreatebestMutaion(DjangoModelFormMutation):
     class Meta:
         form_class =CreatebestForm
         input_field_name = 'favourits'
-        return_field_name = 'resturant_id'
+        return_field_name = 'created'
 #Resturant
 class ResturantType (DjangoObjectType):
     class Meta:

@@ -5,7 +5,7 @@ from .models import *
 class CreatebestForm(forms.ModelForm):
     class Meta:
         model = best
-        fields = ('profile_id','resturant_id',)
+        fields = ('profile_name','resturant_name',)
 class CreateResturantForm(forms.ModelForm):
     class Meta:
         model = Resturant
