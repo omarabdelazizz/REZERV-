@@ -14,7 +14,7 @@ class CreateResturantForm(forms.ModelForm):
 class CreateRequestForm(forms.ModelForm):
     class Meta:
         model = Request
-        fields = ('no_of_people','RequestTypes','rest_admin_id',)
+        fields = ('no_of_people','RequestTypes',)
 
 class CreateResturantAdminForm(forms.ModelForm):
     class Meta:

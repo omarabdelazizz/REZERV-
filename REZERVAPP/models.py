@@ -30,7 +30,7 @@ class Request(models.Model):
     ACCEPTED = 'AC'
     REJECTED = 'REJ'
     CANCELED = 'CANC'
-    PENDING = 'PEND'
+    PENDING = 'PEND'              
     REQUEST_TYPES_CHOICES = [
         (ACCEPTED, 'Accepted'),
         (REJECTED, 'rejected'),
@@ -41,7 +41,9 @@ class Request(models.Model):
 
     def is_upperclass(self):
         return self.RequestTypes in (self.ACCEPTED , self.REJECTED, self.CANCELED, self.PENDING)
-
+#class response (models.Model):
+#ACCEPTED,rejected,canceled
+#default pending
 class ResturantAdmin (models.Model):
     name = models.CharField(max_length=264, unique=True)
     resturantid= models.ForeignKey('Resturant', on_delete=models.CASCADE,null=True,blank=True)
